@@ -1,0 +1,8 @@
+auth-service/node_modules
+auth-service/.env
+course-service/node_modules
+course-service/.env
+teacher-service/node_modules
+teacher-service/.env
+student-service/node_modules
+student-service/.env
