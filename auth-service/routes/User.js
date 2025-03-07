@@ -59,12 +59,12 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/profile', verifyToken, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id);
-        res.json(user);
-    } catch (error) {
-        res.json({ message: error.message });
-    }
+  try {
+      const user = await User.findOne({ email: req.user.email });
+      res.json(user);
+  } catch (error) {
+      res.json({ message: error.message });
+  }
 });
 
 module.exports = router;
