@@ -27,7 +27,7 @@ router.post('/add', verifyToken, async (req, res) => {
 router.post('/enroll/:etudiant_id/:cours_id', verifyToken, async (req, res) => {
     try {
         const { etudiant_id, cours_id } = req.params;
-        const student = await Student.findById(etudiant_id);
+        const student = await Student.findOne({id : etudiant_id});
 
         if (!student) {
             return res.json({ message: 'Étudiant non trouvé' });
@@ -44,7 +44,7 @@ router.post('/enroll/:etudiant_id/:cours_id', verifyToken, async (req, res) => {
 router.get('/enrolledCourses/:etudiant_id', verifyToken, async (req, res) => {
     try {
         const { etudiant_id } = req.params;
-        const student = await Student.findById(etudiant_id);
+        const student = await Student.findOne({id : etudiant_id});
 
         if (!student) {
             return res.json({ message: 'Étudiant non trouvé' });

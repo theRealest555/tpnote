@@ -27,7 +27,7 @@ router.post('/add', verifyToken, async (req, res) => {
 router.post('/assign/:professeur_id/:cours_id', verifyToken, async (req, res) => {
     try {
         const { professeur_id, cours_id } = req.params;
-        const teacher = await Teacher.findById(professeur_id);
+        const teacher = await Teacher.findOne({id : professeur_id});
 
         if (!teacher) {
             return res.json({ message: 'Professeur non trouvé' });

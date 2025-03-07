@@ -11,5 +11,6 @@ const StudentSchema = new Schema({
 });
 
 StudentSchema.plugin(AutoIncrement, { inc_field: 'id' });
+
 const Student = mongoose.model('Student', StudentSchema);
 module.exports = Student;
