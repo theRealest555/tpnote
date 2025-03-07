@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Course = require('../Model/CourseModel');
+const Course = require('../model/CourseModel');
 const { verifyToken } = require('../Middleware/auth');
 
 router.get('/all', verifyToken, async (req, res) => {
@@ -27,7 +27,7 @@ router.put('/update/:id', verifyToken, async (req, res) => {
     try {
         const courseId = req.params.id;
         const updatedData = req.body;
-        const data = await Course.findByIdAndUpdate(courseId, updatedData, { new: true });
+        const data = await Course.findOneAndUpdate({id : courseId}, updatedData, { new: true });
 
         if (!data) {
             return res.json({ message: 'Cours non trouvé' });
@@ -42,7 +42,7 @@ router.put('/update/:id', verifyToken, async (req, res) => {
 router.delete('/delete/:id', verifyToken, async (req, res) => {
     try {
         const courseId = req.params.id;
-        const data = await Course.findByIdAndDelete(courseId);
+        const data = await Course.findOneAndDelete({id : courseId});
 
         if (!data) {
             return res.json({ message: 'Cours non trouvé' });
