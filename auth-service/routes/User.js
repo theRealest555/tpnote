@@ -6,9 +6,9 @@ const User = require('../model/UserModel');
 const { verifyToken } = require('../middleware/auth');
 
 router.post('/register', async (req, res) => {
-    const { email, nom, mdp } = req.body;
+    const {id, email, nom, mdp } = req.body;
 
-    if (!email || !nom || !mdp) {
+    if (!id || !email || !nom || !mdp) {
         return res.json({ message: "Tous les champs sont obligatoires" });
     }
 

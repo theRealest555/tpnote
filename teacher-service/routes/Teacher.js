@@ -15,8 +15,7 @@ router.get('/all', verifyToken, async (req, res) => {
 
 router.post('/add', verifyToken, async (req, res) => {
     try {
-        const { name, bio } = req.body;
-        const newTeacher = new Teacher({ name, bio });
+        const newTeacher = new Teacher(req.body);
         const data = await newTeacher.save();
         res.json(data);
     } catch (error) {
@@ -53,7 +52,7 @@ router.get('/enrolledStudents/:cours_id', verifyToken, async (req, res) => {
         if (!course) {
             return res.json({ message: 'Cours non trouvé' });
         }
-        
+
         const students = await Student.find({ cours: cours_id });
 
         if (!students) {

@@ -15,8 +15,7 @@ router.get('/all', verifyToken, async (req, res) => {
 
 router.post('/add', verifyToken, async (req, res) => {
     try {
-        const { nom, email } = req.body;
-        const newStudent = new Student({ nom, email });
+        const newStudent = new Student(req.body);
         const data = await newStudent.save();
         res.json(data);
     } catch (error) {

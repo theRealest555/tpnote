@@ -14,8 +14,7 @@ router.get('/all', verifyToken, async (req, res) => {
 
 router.post('/add', verifyToken, async (req, res) => {
     try {
-        const { titre, professeur_id, description, prix } = req.body;
-        const newCourse = new Course({ titre, professeur_id, description, prix });
+        const newCourse = new Course(req.body);
         const data = await newCourse.save();
         res.json(data);
     } catch (error) {
