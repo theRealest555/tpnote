@@ -32,6 +32,11 @@ router.post('/assign/:professeur_id/:cours_id', verifyToken, async (req, res) =>
         if (!teacher) {
             return res.json({ message: 'Professeur non trouvé' });
         }
+        const course = await Course.findOne({id : cours_id});
+
+        if (!course) {
+            return res.json({ message: 'Cours non trouvé' });
+        }
 
         teacher.cours.push(cours_id);
         const data = await teacher.save();
@@ -44,6 +49,11 @@ router.post('/assign/:professeur_id/:cours_id', verifyToken, async (req, res) =>
 router.get('/enrolledStudents/:cours_id', verifyToken, async (req, res) => {
     try {
         const { cours_id } = req.params;
+        const course = await Course.findOne({id : cours_id});
+        if (!course) {
+            return res.json({ message: 'Cours non trouvé' });
+        }
+        
         const students = await Student.find({ cours: cours_id });
 
         if (!students) {
